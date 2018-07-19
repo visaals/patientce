@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static String getTime() {
+    public static Long getTime() {
         Date currentTime = Calendar.getInstance().getTime();
         String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
         Long ltime = Long.valueOf(time);
