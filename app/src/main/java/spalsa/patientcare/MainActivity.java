@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 if (patient.isCheckedIn == 0) {
                     myRef.child(patientString).child("isCheckedIn").setValue(1);
                     myRef.child(patientString).child("start24").setValue(getTime());
+                    myRef.child(patientString).child("end24").setValue(addThirtyMinutes(getTime()));
                 }
             }
             catch (Exception e) {
@@ -234,6 +235,31 @@ public class MainActivity extends AppCompatActivity {
         return ltime;
     }
 
+
+    public static Long addThirtyMinutes(Long ihatemylife) {
+        //WHY THE FREAK ARE WE REPRESENTING TIME WITH LONGS
+        String s = String.valueOf(ihatemylife);
+        int b = Integer.valueOf(s.substring(0,2));
+        int e = Integer.valueOf(s.substring(2, 4));
+        e = e + 30;
+        if (e>=60) {
+            e = e-60;
+            b = b + 1;
+            if(b==25) {
+                b = 0;
+            }
+        }
+        String bb = String.valueOf(b);
+        String ee = String.valueOf(e);
+        while(bb.length() < 2) {
+            bb = 0 + bb;
+        }
+        while(ee.length() < 2) {
+            ee = 0 + ee;
+        }
+        return Long.valueOf(bb + ee);
+
+    }
 
 
 }
