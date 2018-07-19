@@ -202,8 +202,10 @@ public class MainActivity extends AppCompatActivity {
     public void checkIn() {
         if(loggedIn) {
             try {
-                myRef.child(patientString).child("isCheckedIn").setValue(1);
-                myRef.child(patientString).child("start24").setValue(getTime());
+                if (patient.isCheckedIn == 0) {
+                    myRef.child(patientString).child("isCheckedIn").setValue(1);
+                    myRef.child(patientString).child("start24").setValue(getTime());
+                }
             }
             catch (Exception e) {
                 Log.d("TimeDebug", e.toString());
@@ -214,8 +216,10 @@ public class MainActivity extends AppCompatActivity {
     public void checkOut() {
         if(loggedIn) {
             try {
-                myRef.child(patientString).child("isDone").setValue(1);
-                myRef.child(patientString).child("end24").setValue(getTime());
+                if (patient.isDone == 0) {
+                    myRef.child(patientString).child("isDone").setValue(1);
+                    myRef.child(patientString).child("end24").setValue(getTime());
+                }
             }
             catch (Exception e) {
                 Log.d("TimeDebug", e.toString());
