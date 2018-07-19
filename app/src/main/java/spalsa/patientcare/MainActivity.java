@@ -2,12 +2,11 @@ package spalsa.patientcare;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -17,21 +16,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean loggedIn;
+    private String patientString;
     private Patient patient;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        patientString = "";
+        loggedIn = false;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -45,16 +52,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button checkinButton = findViewById(R.id.login);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Button checkinButton = findViewById(R.id.checkin);
+        checkinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkin();
+                checkIn();
             }
         });
 
-        loggedIn = false;
-        setText("");
+        Button clockOutButton = findViewById(R.id.checkout);
+        clockOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkOut();
+            }
+        });
+
+        setText();
         statusBar();
     }
 
@@ -80,13 +94,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setText(String name) {
+    public void setText() {
         TextView view = findViewById(R.id.text);
-        if (name.equals("")) {
-            view.setText("Welcome to the PatientCare app please login.");
+        if (loggedIn) {
+            view.setText("Welcome " + patientString);
         }
         else {
-            view.setText("Welcome " + name);
+            view.setText("Welcome to the PatientCare app please login.");
         }
     }
 
@@ -104,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setPatient(input.getText().toString());
+                patientString = input.getText().toString();
+                setPatient();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -117,9 +132,9 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void setPatient(final String patientString) {
+    public void setPatient() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Patients");
+        myRef = database.getReference("Patients");
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -131,15 +146,15 @@ public class MainActivity extends AppCompatActivity {
                     if(patientString.equals("")) throw new Exception();
                     patient = dataSnapshot.child(patientString).getValue(Patient.class);
                     String value = patient.toString();
-                    setText(patientString);
                     loggedIn = true;
+                    setText();
                     statusBar();
                     Log.d("FirebaseDebug", "Value is: " + value);
                 }
                 catch (Exception e) {
                     Toast.makeText(MainActivity.this, patientString + " not found.", Toast.LENGTH_SHORT).show();
-                    setText("");
                     loggedIn = false;
+                    setText();
                     statusBar();
                     Log.d("FirebaseDebug", "User not found: " + patientString);
                 }
@@ -157,7 +172,15 @@ public class MainActivity extends AppCompatActivity {
         TextView statusBar = findViewById(R.id.status);
         if(loggedIn) {
             long delay = patient.delay();
-            if(delay == 0) {
+            if (patient.isDone == 1 || patient.isCheckedIn == 1) {
+                statusBar.setText("Thank you for arriving");
+                        statusBar.setBackgroundResource(R.color.colorPrimary);
+            }
+            else if (patient.isCancelled == 1) {
+                statusBar.setText("Please call (585) 362 9050 to reschedule");
+                        statusBar.setBackgroundResource(R.color.ohno);
+            }
+            else if(delay == 0) {
                 statusBar.setText("Your appointment is scheduled for " + patient.stringSchedStart24());
                 statusBar.setBackgroundResource(R.color.colorPrimary);
             }
@@ -177,6 +200,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkIn() {
-        
+        if(loggedIn) {
+            try {
+                myRef.child(patientString).child("isCheckedIn").setValue(1);
+                Date currentTime = Calendar.getInstance().getTime();
+                String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
+                Long ltime = Long.valueOf(time);
+                myRef.child(patientString).child("start24").setValue(ltime);
+            }
+            catch (Exception e) {
+                Log.d("TimeDebug", e.toString());
+            }
+        }
     }
+
+    public void checkOut() {
+        if(loggedIn) {
+            try {
+                myRef.child(patientString).child("isDone").setValue(1);
+                Date currentTime = Calendar.getInstance().getTime();
+                String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
+                Long ltime = Long.valueOf(time);
+                myRef.child(patientString).child("end24").setValue(ltime);
+            }
+            catch (Exception e) {
+                Log.d("TimeDebug", e.toString());
+            }
+        }
+    }
+
+
+
 }
