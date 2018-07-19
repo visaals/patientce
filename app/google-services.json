@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "163319160636",
+    "firebase_url": "https://spalsa-f42e7.firebaseio.com",
+    "project_id": "spalsa-f42e7",
+    "storage_bucket": "spalsa-f42e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163319160636:android:58b74b00a2115216",
+        "android_client_info": {
+          "package_name": "spalsa.patientcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163319160636-2chatdn5jd43kt200dnl677m5gaqabeh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "spalsa.patientcare",
+            "certificate_hash": "5abc3023d9dcd2644cb154583525828689058c89"
+          }
+        },
+        {
+          "client_id": "163319160636-ph5qeeqjlhuujhd53rrrmfna6t8eb8m4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtrULZVwCT6W926ef9_q6Qhg4TQzObqCQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163319160636-ph5qeeqjlhuujhd53rrrmfna6t8eb8m4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
