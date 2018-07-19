@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             view.setText("Welcome " + patientString);
         }
         else {
-            view.setText("Welcome to the PatientCare app please login.");
+            view.setText("Welcome to the patientce app please login.");
         }
     }
 
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if (patient.isCancelled == 1) {
-                statusBar.setText("Please call (585) 362 9050 to reschedule");
+                statusBar.setText("Your appointment is cancelled.\n Please call (405) 471-04237 to reschedule");
                         statusBar.setBackgroundResource(R.color.ohno);
             }
             else if(delay == 0) {
@@ -185,12 +185,13 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if(delay > 0) {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " is delayed to " + patient.stringEarliestCome24());
-                statusBar.setBackgroundResource(R.color.colorAccent);
+                statusBar.setText("Your " + patient.stringSchedStart24() + " appointment is available at " + patient.stringEarliestCome24());
+                statusBar.setBackgroundResource(R.color.colorPrimaryDark);
             }
             else {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " is available at " + patient.stringEarliestCome24());
-                statusBar.setBackgroundResource(R.color.colorPrimaryDark);
+                statusBar.setText("Your " + patient.stringSchedStart24() + " appointment is delayed to " + patient.stringEarliestCome24());
+                statusBar.setBackgroundResource(R.color.colorAccent);
+
             }
         }
         else {
