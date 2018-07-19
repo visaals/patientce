@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,15 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -53,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("FirebaseDebug", "Failed to read value.", error.toException());
             }
         });
+
+        setText();
+        setStatus();
     }
 
     @Override
@@ -75,5 +70,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setText() {
+        TextView view = findViewById(R.id.text);
+        view.setText("Welcome to the PatientCare app please login.");
+    }
+
+    public void setStatus() {
+        TextView view = findViewById(R.id.status);
+        view.setText("Your appointment is late");
+        view.setBackgroundColor(R.color.colorAccent);
     }
 }
