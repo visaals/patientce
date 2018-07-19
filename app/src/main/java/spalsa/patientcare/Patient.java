@@ -9,6 +9,7 @@ public class Patient {
     public long schedStart24;
     public long schedEnd24;
     public long isDone;
+    public long earliestCome24;
 
     public Patient() {
 
@@ -19,7 +20,7 @@ public class Patient {
     }
 
     public long delay() {
-        return start24 - schedStart24;
+        return start24 - earliestCome24;
     }
 
     public static String longToString(long l) {
@@ -44,6 +45,10 @@ public class Patient {
     }
     public String stringEnd24() {
         return longToString(schedStart24);
+    }
+
+    public String stringEarliestCome24() {
+        return longToString(earliestCome24);
     }
 
 }

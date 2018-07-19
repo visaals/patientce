@@ -185,11 +185,11 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if(delay > 0) {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " running " + String.valueOf(delay) + " minutes behind");
+                statusBar.setText("Your " + patient.stringSchedStart24() + " is delayed to " + patient.stringEarliestCome24());
                 statusBar.setBackgroundResource(R.color.colorAccent);
             }
             else {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " is available " + String.valueOf(delay) + " minutes early");
+                statusBar.setText("Your " + patient.stringSchedStart24() + " is available at " + patient.stringEarliestCome24());
                 statusBar.setBackgroundResource(R.color.colorPrimaryDark);
             }
         }
@@ -203,10 +203,7 @@ public class MainActivity extends AppCompatActivity {
         if(loggedIn) {
             try {
                 myRef.child(patientString).child("isCheckedIn").setValue(1);
-                Date currentTime = Calendar.getInstance().getTime();
-                String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
-                Long ltime = Long.valueOf(time);
-                myRef.child(patientString).child("start24").setValue(ltime);
+                myRef.child(patientString).child("start24").setValue(getTime());
             }
             catch (Exception e) {
                 Log.d("TimeDebug", e.toString());
@@ -218,15 +215,19 @@ public class MainActivity extends AppCompatActivity {
         if(loggedIn) {
             try {
                 myRef.child(patientString).child("isDone").setValue(1);
-                Date currentTime = Calendar.getInstance().getTime();
-                String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
-                Long ltime = Long.valueOf(time);
-                myRef.child(patientString).child("end24").setValue(ltime);
+                myRef.child(patientString).child("end24").setValue(getTime());
             }
             catch (Exception e) {
                 Log.d("TimeDebug", e.toString());
             }
         }
+    }
+
+    public static String getTime() {
+        Date currentTime = Calendar.getInstance().getTime();
+        String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
+        Long ltime = Long.valueOf(time);
+        return ltime;
     }
 
 
