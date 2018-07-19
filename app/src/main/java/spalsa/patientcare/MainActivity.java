@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button checkinButton = findViewById(R.id.login);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkin();
+            }
+        });
+
         loggedIn = false;
         setText("");
         statusBar();
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.help) {
             return true;
         }
 
@@ -120,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 try {
+                    if(patientString.equals("")) throw new Exception();
                     patient = dataSnapshot.child(patientString).getValue(Patient.class);
                     String value = patient.toString();
                     setText(patientString);
@@ -150,20 +159,24 @@ public class MainActivity extends AppCompatActivity {
             long delay = patient.delay();
             if(delay == 0) {
                 statusBar.setText("Your appointment is scheduled for " + patient.stringSchedStart24());
-                statusBar.setBackgroundColor(R.color.colorPrimary);
+                statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if(delay > 0) {
                 statusBar.setText("Your " + patient.stringSchedStart24() + " running " + String.valueOf(delay) + " minutes behind");
-                statusBar.setBackgroundColor(R.color.colorAccent);
+                statusBar.setBackgroundResource(R.color.colorAccent);
             }
             else {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " is availible " + String.valueOf(delay) + " minutes early");
-                statusBar.setBackgroundColor(R.color.colorPrimaryDark);
+                statusBar.setText("Your " + patient.stringSchedStart24() + " is available " + String.valueOf(delay) + " minutes early");
+                statusBar.setBackgroundResource(R.color.colorPrimaryDark);
             }
         }
         else {
             statusBar.setText("Login to view status");
-            statusBar.setBackgroundColor(R.color.colorPrimary);
+            statusBar.setBackgroundResource(R.color.colorPrimary);
         }
+    }
+
+    public void checkIn() {
+        
     }
 }
