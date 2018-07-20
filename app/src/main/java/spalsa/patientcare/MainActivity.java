@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if (patient.isCheckedIn == 1) {
-                statusBar.setText("Thank you for checking ing");
+                statusBar.setText("Thank you for checking in");
                 statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if (patient.isCancelled == 1) {
