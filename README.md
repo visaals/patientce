@@ -4,6 +4,7 @@
 patientce aims to streamline the hospital waiting room process.  patientce displays live updates to patients concerning his or her appointments status regarding if the hospital is running late or perhaps the patient can get in early.
 
 ![Appointment is on time.](https://user-images.githubusercontent.com/23038185/42981027-c000b830-8b9f-11e8-9036-abec20cfc717.png)
+<img src="https://user-images.githubusercontent.com/23038185/42981027-c000b830-8b9f-11e8-9036-abec20cfc717.png" alt="IMAGE ALT TEXT HERE" width="240"/></a>
 
 ![Appointment is delayed.](https://user-images.githubusercontent.com/23038185/42981025-bfe0e082-8b9f-11e8-9468-fe334d42253d.png)
 
