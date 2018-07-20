@@ -7,7 +7,7 @@ patientce aims to streamline the hospital waiting room process.  patientce displ
 
 <img src="https://user-images.githubusercontent.com/23038185/42981025-bfe0e082-8b9f-11e8-9468-fe334d42253d.png" alt="Appointment is delayed." width="240"/>
 
-<img src="https://user-images.githubusercontent.com/23038185/42981026-bff0874e-8b9f-11e8-83fe-5f9b5fbaad4f.png" alt="Appointment is available early. width="240"/>
+<img src="https://user-images.githubusercontent.com/23038185/42981026-bff0874e-8b9f-11e8-83fe-5f9b5fbaad4f.png" alt="Appointment is available early." width="240"/>
 
 <img src="https://user-images.githubusercontent.com/23038185/42981024-bfd0ab36-8b9f-11e8-8e92-6d8cf61221d9.png" alt="Appointment is cancelled because the patient was too late." width="240"/>
 
