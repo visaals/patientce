@@ -11,7 +11,7 @@ patientce aims to streamline the hospital waiting room process.  patientce displ
 
 <img src="https://user-images.githubusercontent.com/23038185/42981024-bfd0ab36-8b9f-11e8-8e92-6d8cf61221d9.png" alt="Appointment is cancelled because the patient was too late." width="240"/>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qJAQvQS2cq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+[Video demo](https://www.youtube.com/embed/qJAQvQS2cq8)
 
 Appointments are pulled of a Google Calendar into a Firebase Database. The Android application retrieves a specific user and then sees that user's appointment details. The check in and check out is done manually by the patient for this build, but in an actual implementation it would be done by the doctor and/or the front desk. As the patient is checked in and checked out a Python application updates all appointments based on if the hospital is running ahead or behind schedule. The Python application also updates the Google Calendar, so the doctor can see the updated schedule.
 
