@@ -4,6 +4,10 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 import datetime
 from firebase import firebase
+import time
+
+
+
 
 #Firebase connection
 firebase = firebase.FirebaseApplication('https://spalsa-h.firebaseio.com/', None)
@@ -17,8 +21,6 @@ if not creds or creds.invalid:
     creds = tools.run_flow(flow, store)
 service = build('calendar', 'v3', http=creds.authorize(Http()))
 
-#Import Event
-now = datetime.datetime.utcnow().isoformat() + 'Z'
 
 patients = firebase.get('/Patients', None)
 for key in patients:
@@ -30,13 +32,26 @@ for key in patients:
 		etime = '0' + etime
 	start = '2018-07-20T' + stime[:2] + ':' + stime[2:] + ':00-05:00'
 	end = '2018-07-20T' + etime[:2] + ':' + etime[2:] + ':00-05:00'
-	event = {
-	  'summary': key,
-	  'start': {
-	    'dateTime': start,
-	  },
-	  'end': {
-	    'dateTime': end,
-	  }
-  	}
-  	service.events().update(calendarId='primary', eventId=patients[key]['eventID'],  body=event).execute()
+	if patients[key]['isCancelled'] == 1:
+		event = {
+		  'summary': key,
+		  'colorId': '11',
+		  'start': {
+		    'dateTime': start
+		  },
+		  'end': {
+		    'dateTime': end
+		  }
+	  	}
+	  	service.events().update(calendarId='primary', eventId=patients[key]['eventID'], body=event).execute()
+  	else:
+		event = {
+		  'summary': key,
+		  'start': {
+		    'dateTime': start
+		  },
+		  'end': {
+		    'dateTime': end
+		  }
+	  	}
+  		service.events().update(calendarId='primary', eventId=patients[key]['eventID'],  body=event).execute()
