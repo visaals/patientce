@@ -9,7 +9,7 @@ from firebase import firebase
 firebase = firebase.FirebaseApplication('https://spalsa-h.firebaseio.com/', None)
 
 # Setup the Calendar API
-SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
+SCOPES = 'https://www.googleapis.com/auth/calendar'
 store = file.Storage('token.json')
 creds = store.get()
 if not creds or creds.invalid:
@@ -25,5 +25,7 @@ events = events_result.get('items', [])
 for event in events:
 	start = int(event['start'].values()[0].split("T")[1].split("00-")[0].replace(":",""))
 	end = int(event['end'].values()[0].split("T")[1].split("00-")[0].replace(":",""))
-	firebase.put('/Patients', event['summary'], {'CheckedIn': 0, 'Start24': start, 'End24': end, 
-                                      'SchedStart24': start, 'SchedEnd24': end})
+	firebase.put('/Patients', event['summary'], {'isCheckedIn': 0, 'start24': start, 'end24': end, 
+                                      'schedStart24': start, 'schedEnd24': end, 'isCancelled': 0,
+                                      'eventID': event['id'], 'isDone': 0, 'earliestCome24': 0})
+

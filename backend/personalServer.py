@@ -1,10 +1,8 @@
 import pyrebase
 from datetime import datetime
-import subprocess
+from subprocess import call
 
-firstrun = "/Users/jb058059/shipp/spalsa/LoaddddCal.py"
-callFile = "/Users/jb058059/shipp/spalsa/LoadDatatoCal.py"
-process = subprocess.Popen(firstrun, stdout=subprocess.PIPE)
+call(["python", "loaddata.py"])
 
 def main():
 
@@ -93,7 +91,7 @@ def stream_handler(message):
     print(message["event"]) # put
     print(message["path"]) # /-K7yGTTEp7O549EzTYtI
     print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
-    process = subprocess.Popen(callFile, stdout=subprocess.PIPE)
+    call(["python", "loaddatatocal.py"])
     cancelMeetings()
     notifyPatientsToComeInEarly()
 
