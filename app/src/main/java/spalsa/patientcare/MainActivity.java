@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
         if (e>=60) {
             e = e-60;
             b = b + 1;
-            if(b==25) {
+            if(b==24) {
                 b = 0;
             }
         }
