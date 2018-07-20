@@ -7,7 +7,7 @@ patientce aims to streamline the hospital waiting room process.  patientce displ
 
 ![Appointment is delayed](https://user-images.githubusercontent.com/23038185/42981025-bfe0e082-8b9f-11e8-9468-fe334d42253d.png =250x)
 
-![](https://user-images.githubusercontent.com/23038185/42981026-bff0874e-8b9f-11e8-83fe-5f9b5fbaad4f.png =250x)
+![Appointment is availible early](https://user-images.githubusercontent.com/23038185/42981026-bff0874e-8b9f-11e8-83fe-5f9b5fbaad4f.png =250x)
 
 ![Appointment is cancelled because the patient was too late.](https://user-images.githubusercontent.com/23038185/42981024-bfd0ab36-8b9f-11e8-8e92-6d8cf61221d9.png =250x)
 
@@ -15,8 +15,11 @@ Appointments are pulled of a Google Calendar into a Firebase Database. The Andro
 
 Contributions:
 [Visaal Ambalam](https://github.com/visaals/): Business logic and Firebase Integration
+
 [Cameron Jump](https://github.com/cameronjump/): Android Application and Firebase Integration
+
 [John Bisignano](https://github.com/johnbisognano): Database and Google Calendar Doctor View
+
 [Connor Beganksy](https://github.com/ConnorBegansky): Design and UI decisions 
 
 
