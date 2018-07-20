@@ -2,7 +2,7 @@ import pyrebase
 from datetime import datetime
 from subprocess import call
 
-call(["python", "loaddata.py"])
+call(["python", "loadCal.py"])
 
 def main():
 
