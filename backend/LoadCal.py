@@ -27,5 +27,5 @@ for event in events:
 	end = int(event['end'].values()[0].split("T")[1].split("00-")[0].replace(":",""))
 	firebase.put('/Patients', event['summary'], {'isCheckedIn': 0, 'start24': start, 'end24': end, 
                                       'schedStart24': start, 'schedEnd24': end, 'isCancelled': 0,
-                                      'eventID': event['id'], 'isDone': 0, 'earliestCome24': 0})
+                                      'eventID': event['id'], 'isDone': 0, 'earliestCome24': start})
 
