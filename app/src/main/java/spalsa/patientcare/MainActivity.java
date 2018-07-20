@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             view.setText("Welcome " + patientString);
         }
         else {
-            view.setText("Welcome to the PatientCare app please login.");
+            view.setText("Welcome to the patientce app please login.");
         }
     }
 
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if (patient.isCancelled == 1) {
-                statusBar.setText("Please call (585) 362 9050 to reschedule");
+                statusBar.setText("Your appointment is cancelled.\n Please call (405) 471-04237 to reschedule");
                         statusBar.setBackgroundResource(R.color.ohno);
             }
             else if(delay == 0) {
@@ -185,12 +185,13 @@ public class MainActivity extends AppCompatActivity {
                 statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if(delay > 0) {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " is delayed to " + patient.stringEarliestCome24());
-                statusBar.setBackgroundResource(R.color.colorAccent);
+                statusBar.setText("Your " + patient.stringSchedStart24() + " appointment is available at " + patient.stringEarliestCome24());
+                statusBar.setBackgroundResource(R.color.colorPrimaryDark);
             }
             else {
-                statusBar.setText("Your " + patient.stringSchedStart24() + " is available at " + patient.stringEarliestCome24());
-                statusBar.setBackgroundResource(R.color.colorPrimaryDark);
+                statusBar.setText("Your " + patient.stringSchedStart24() + " appointment is delayed to " + patient.stringEarliestCome24());
+                statusBar.setBackgroundResource(R.color.colorAccent);
+
             }
         }
         else {
@@ -202,8 +203,11 @@ public class MainActivity extends AppCompatActivity {
     public void checkIn() {
         if(loggedIn) {
             try {
-                myRef.child(patientString).child("isCheckedIn").setValue(1);
-                myRef.child(patientString).child("start24").setValue(getTime());
+                if (patient.isCheckedIn == 0) {
+                    myRef.child(patientString).child("isCheckedIn").setValue(1);
+                    myRef.child(patientString).child("start24").setValue(getTime());
+                    myRef.child(patientString).child("end24").setValue(addThirtyMinutes(getTime()));
+                }
             }
             catch (Exception e) {
                 Log.d("TimeDebug", e.toString());
@@ -214,8 +218,10 @@ public class MainActivity extends AppCompatActivity {
     public void checkOut() {
         if(loggedIn) {
             try {
-                myRef.child(patientString).child("isDone").setValue(1);
-                myRef.child(patientString).child("end24").setValue(getTime());
+                if (patient.isDone == 0) {
+                    myRef.child(patientString).child("isDone").setValue(1);
+                    myRef.child(patientString).child("end24").setValue(getTime());
+                }
             }
             catch (Exception e) {
                 Log.d("TimeDebug", e.toString());
@@ -223,13 +229,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static String getTime() {
+    public static Long getTime() {
         Date currentTime = Calendar.getInstance().getTime();
         String time = currentTime.toString().split(" ")[3].split(":")[0] + currentTime.toString().split(" ")[3].split(":")[1];
         Long ltime = Long.valueOf(time);
         return ltime;
     }
 
+
+    public static Long addThirtyMinutes(Long ihatemylife) {
+        //WHY THE FREAK ARE WE REPRESENTING TIME WITH LONGS
+        String s = String.valueOf(ihatemylife);
+        int b = Integer.valueOf(s.substring(0,2));
+        int e = Integer.valueOf(s.substring(2, 4));
+        e = e + 30;
+        if (e>=60) {
+            e = e-60;
+            b = b + 1;
+            if(b==25) {
+                b = 0;
+            }
+        }
+        String bb = String.valueOf(b);
+        String ee = String.valueOf(e);
+        while(bb.length() < 2) {
+            bb = 0 + bb;
+        }
+        while(ee.length() < 2) {
+            ee = 0 + ee;
+        }
+        return Long.valueOf(bb + ee);
+
+    }
 
 
 }
