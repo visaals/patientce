@@ -172,9 +172,13 @@ public class MainActivity extends AppCompatActivity {
         TextView statusBar = findViewById(R.id.status);
         if(loggedIn) {
             long delay = patient.delay();
-            if (patient.isDone == 1 || patient.isCheckedIn == 1) {
-                statusBar.setText("Thank you for arriving");
-                        statusBar.setBackgroundResource(R.color.colorPrimary);
+            if (patient.isDone == 1) {
+                statusBar.setText("We hope you enjoyed your visit");
+                statusBar.setBackgroundResource(R.color.colorPrimary);
+            }
+            else if (patient.isCheckedIn == 1) {
+                statusBar.setText("Thank you for checking in");
+                statusBar.setBackgroundResource(R.color.colorPrimary);
             }
             else if (patient.isCancelled == 1) {
                 statusBar.setText("Your appointment is cancelled.\n Please call (405) 471-04237 to reschedule");

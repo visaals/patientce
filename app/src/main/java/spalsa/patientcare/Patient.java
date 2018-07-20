@@ -1,5 +1,7 @@
 package spalsa.patientcare;
 
+import android.util.Log;
+
 public class Patient {
 
     public long isCheckedIn;
@@ -20,7 +22,8 @@ public class Patient {
     }
 
     public long delay() {
-        return start24 - earliestCome24;
+        Log.d("Delay", String.valueOf(start24 - earliestCome24));
+        return schedStart24 - earliestCome24;
     }
 
     public static String longToString(long l) {
