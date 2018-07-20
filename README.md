@@ -23,4 +23,4 @@ Contributions:
 
 [John Bisognano](https://github.com/johnbisognano): Firebase setup, Google Calendar API integration
 
-[Connor Beganksy](https://github.com/ConnorBegansky): Design, UI decisions
+[Connor Beganksy](https://github.com/ConnorBegansky): Chief Transportation Officer 
