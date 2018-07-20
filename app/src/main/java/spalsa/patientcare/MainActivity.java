@@ -257,10 +257,10 @@ public class MainActivity extends AppCompatActivity {
         String bb = String.valueOf(b);
         String ee = String.valueOf(e);
         while(bb.length() < 2) {
-            bb = 0 + bb;
+            bb = "0" + bb;
         }
         while(ee.length() < 2) {
-            ee = 0 + ee;
+            ee = "0" + ee;
         }
         return Long.valueOf(bb + ee);
 
