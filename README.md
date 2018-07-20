@@ -15,11 +15,11 @@ Appointments are pulled of a Google Calendar into a Firebase Database. The Andro
 
 Contributions:
 
-[Visaal Ambalam](https://github.com/visaals/): Business logic and Firebase Integration
+[Visaal Ambalam](https://github.com/visaals/): Business logic and Firebase integration
 
-[Cameron Jump](https://github.com/cameronjump/): Android Application and Firebase Integration
+[Cameron Jump](https://github.com/cameronjump/): Android Application and Firebase integration
 
-[John Bisignano](https://github.com/johnbisognano): Database and Google Calendar Doctor View
+[John Bisognano](https://github.com/johnbisognano): Firebase setup, Google Calendar API integration
 
 [Connor Beganksy](https://github.com/ConnorBegansky): Design and UI decisions 
 
